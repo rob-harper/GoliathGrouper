@@ -265,4 +265,18 @@ plot_cv_vs_occurrence <- function(df, yr, plotTitle){
 #   
 # }
 
+plot_counts <- function(df) {
+  df %>%
+    group_by(YEAR) %>%
+    summarise(total_counts = sum(NUM, na.rm = TRUE), .groups = "drop") %>%
+    ggplot(aes(x = YEAR, y = total_counts)) +
+    geom_col(fill = "steelblue") +
+    geom_text(aes(label = round(total_counts, 1)), vjust = -0.5, size = 3) +
+    labs(
+      title = "Total Counts per Year",
+      x = "Year",
+      y = "Total Counts"
+    ) +
+    theme_minimal()
+}
 
